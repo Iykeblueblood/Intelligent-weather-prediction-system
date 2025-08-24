@@ -73,7 +73,7 @@ def get_gemini_response(facts, conclusions):
     Write a short, engaging weather report. Be conversational and helpful. For example, if there's a high UV index, advise wearing sunscreen. If it's stormy, suggest staying indoors.
     """
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-2.5-pro')
         response = model.generate_content(prompt)
         return response.text
     except Exception as e:
@@ -137,4 +137,5 @@ if st.button("Get Forecast"):
             st.subheader("🤖 Weather Forecast")
             with st.spinner("Generating AI-powered narrative..."):
                 ai_forecast = get_gemini_response(facts, conclusions)
+
                 st.markdown(ai_forecast)

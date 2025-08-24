@@ -8,3 +8,23 @@ How This System Works
 - Next, these conclusions—along with the original data—are handed over to Google's Gemini AI. This AI acts as a weather reporter, weaving all the structured information into a single, easy-to-read narrative. It explains what the weather will actually feel like and gives helpful, context-aware advice.
 
 This hybrid approach combines the logical precision of an expert system with the fluent communication of a large language model.
+
+
+```mermaid
+graph LR
+    subgraph "1. Input & Data Fetching"
+        User[User Enters City] --> UI[Streamlit UI] --> Data[Fetch Data via<br>OpenWeatherMap API] --> RawData{Raw Weather Data};
+    end
+
+    subgraph "2. Parallel AI Processing"
+        RawData --> RuleEngine[Rule-Based System] --> Conclusions[Logical Conclusions];
+        RawData --> AI_Module[Generative AI Module];
+        Conclusions --> AI_Module;
+    end
+    
+    subgraph "3. AI Generation & Final Output"
+        AI_Module -- Calls API --> Gemini((Google Gemini API)) --> AIForecast[AI Narrative];
+        RawData --> Display[Final Report Display];
+        Conclusions --> Display;
+        AIForecast --> Display;
+    end
